@@ -161,11 +161,8 @@ const mommys = {
     }
 }
 
-
-//process.env.APPDATAAA
-
 /*
-CARGO_MOMMYS_LITTLE
+CARGO_MOMMYS_LITTLE // '/' sepperated list
 CARGO_MOMMYS_PRONOUNS
 CARGO_MOMMYS_ROLES 
 CARGO_MOMMYS_EMOTES 
@@ -173,7 +170,7 @@ CARGO_MOMMYS_MOODS
 CARGO_MOMMYS_PARTS 
 CARGO_MOMMYS_FUCKING 
 
-NODE_MOMMYS_LITTLE
+NODE_MOMMYS_LITTLE // '/' sepperated list
 NODE_MOMMYS_PRONOUNS
 NODE_MOMMYS_ROLES 
 NODE_MOMMYS_EMOTES 
@@ -184,16 +181,18 @@ NODE_MOMMYS_ATTENTION
 NODE_MOMMYS_PATIENCE
 */
 
-let MOMMYS_LITTLE;
-let MOMMYS_PRONOUNS;
-let MOMMYS_ROLES;
-let MOMMYS_EMOTES;
-let MOMMYS_MOODS;
-let MOMMYS_PARTS;
-let MOMMYS_FUCKING;
+let MOMMYS_LITTLE = "";
+let MOMMYS_PRONOUNS = "";
+let MOMMYS_ROLES = "";
+let MOMMYS_EMOTES = "";
+let MOMMYS_MOODS = "";
+let MOMMYS_PARTS = "";
+let MOMMYS_FUCKING = "";
 
-let MOMMYS_ATTENTION;
-let MOMMYS_PATIENCE;
+let MOMMYS_ATTENTION = "";
+let MOMMYS_PATIENCE = "";
+
+let MOMMYS_DEBUG = false;
 
 
 const oldLog = console.log;
@@ -205,7 +204,7 @@ console.error = (...args) => { oldLog(...args); const output = mommys_output(fal
 
 function mommys_output(isGood) {
 
-    let output = ""
+    let output = "";
 
     MOMMYS_LITTLE = getSetting("NODE_MOMMYS_LITTLE", "CARGO_MOMMYS_LITTLE", mommys.vars.affectionate_term.defaults);
     MOMMYS_PRONOUNS = getSetting("NODE_MOMMYS_PRONOUNS", "CARGO_MOMMYS_PRONOUNS", mommys.vars.pronoun.defaults);
@@ -218,21 +217,32 @@ function mommys_output(isGood) {
     MOMMYS_ATTENTION = getSetting("NODE_MOMMYS_ATTENTION", undefined, [1]); // [ 1 ] as in length of 1 by default
     MOMMYS_PATIENCE = getSetting("NODE_MOMMYS_PATIENCE", undefined, [1]);
 
-    const mood = MOMMYS_MOODS[randomFromLength(MOMMYS_MOODS)];
+    const mood = MOMMYS_MOODS.split("/")[randomFromLength(MOMMYS_MOODS.split("/"))];
     let input = "";
 
     if (isGood) {
         input = mommys.moods[mood].positive[randomFromLength(mommys.moods[mood].positive)]; // random output based on random mood
     }
     else {
-        input = mommys.moods[mood].negative[randomFromLength(mommys.moods[mood].positive)]; // random output based on random mood
+        input = mommys.moods[mood].negative[randomFromLength(mommys.moods[mood].negative)]; // random output based on random mood
     }
 
-    output = input.replace("{affectionate_term}", MOMMYS_LITTLE[randomFromLength(MOMMYS_LITTLE)])
-        .replace("{role}", MOMMYS_ROLES[randomFromLength(MOMMYS_ROLES)])
-        .replace("{pronoun}", MOMMYS_PRONOUNS[randomFromLength(MOMMYS_PRONOUNS)])
-        .replace("{denigrating_term}", MOMMYS_FUCKING[randomFromLength(MOMMYS_FUCKING)])
-        .replace("{part}", MOMMYS_PARTS[randomFromLength(MOMMYS_PARTS)]);
+    let mommys_little = MOMMYS_LITTLE.split("/")[randomFromLength(MOMMYS_LITTLE.split("/"))];
+    let mommys_role = MOMMYS_ROLES.split("/")[randomFromLength(MOMMYS_ROLES.split("/"))];
+    let mommys_pronouns = MOMMYS_PRONOUNS.split("/")[randomFromLength(MOMMYS_PRONOUNS.split("/"))];
+    let mommys_fucking = MOMMYS_FUCKING.split("/")[randomFromLength(MOMMYS_FUCKING.split("/"))];
+    let mommys_parts = MOMMYS_PARTS.split("/")[randomFromLength(MOMMYS_PARTS.split("/"))];
+
+    try {
+        output = input.replace("{affectionate_term}", mommys_little)
+            .replace("{role}", mommys_role)
+            .replace("{pronoun}", mommys_pronouns)
+            .replace("{denigrating_term}", mommys_fucking)
+            .replace("{part}", mommys_parts);
+    }
+    catch (error) {
+        oldError(`mood:${mood}\ninput:${input}\nmommys_little:${mommys_little}\nmommys_role:${mommys_role}\nmommys_pronouns:${mommys_pronouns}\nmommys_fucking:${mommys_fucking}\nmommys_parts:${mommys_parts}\n${error}`);
+    }
 
     return output;
 }
@@ -243,10 +253,21 @@ function getSetting(nodeKey, cargoKey, defaultVal) {
     } else if (process.env[cargoKey] !== undefined) {
         return process.env[cargoKey];
     } else {
-        return defaultVal;
+        return defaultVal.join('/');
     }
 }
 
 function randomFromLength(variable) {
     return [Math.floor(Math.random() * (variable.length))]
+}
+
+
+function testing() {
+    console.log("This is a log test...");
+    console.error("This is an error test...");
+}
+
+// Mommy wants to practice her skills 💖
+if (MOMMYS_DEBUG) {
+    testing();
 }
