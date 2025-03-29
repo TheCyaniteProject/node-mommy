@@ -1,0 +1,15 @@
+{
+  "name": "node-mommy",
+  "version": "1.3.1",
+  "main": "mommy.js",
+  "bin": {
+    "node-mommy": "mommy.js"
+  },
+  "scripts": {
+    "start": "node mommy.js"
+  },
+  "keywords": [ "mommy", "node-mommy" ],
+  "author": "TheCyaniteProject",
+  "license": "LGPL-3.0-only",
+  "description": "Mommy's here to help you with node~"
+}
