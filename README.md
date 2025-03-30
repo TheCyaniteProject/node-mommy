@@ -47,7 +47,7 @@ Simply run your Node.js application as you normally would, and let node-mommy do
 
 ## Configuration
 
-Mommy personalizes her messages using the following environment variables. Each variable requires a list (`["option1, option2"]`), and mommy will randomly select one for each message:
+Mommy personalizes her messages using the following environment variables. All of these options can take a `/` separated list, and mommy will randomly select one for each message:
 
 - **NODE_MOMMY_LITTLE**  
   What mommy should call you.  
