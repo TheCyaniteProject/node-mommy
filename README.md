@@ -59,23 +59,23 @@ Simply run your Node.js application as you normally would, and let node-mommy do
 
 Mommy personalizes her messages using the following environment variables. All of these options can take a `/` separated list, and mommy will randomly select one for each message:
 
-- **NODE_MOMMY_LITTLE**  
+- **NODE_MOMMYS_LITTLE**  
   What mommy should call you.  
   _Default: "girl"_
 
-- **NODE_MOMMY_PRONOUNS**  
+- **NODE_MOMMYS_PRONOUNS**  
   Which pronouns mommy uses for herself.  
   _Default: "her"_
 
-- **NODE_MOMMY_ROLES**  
+- **NODE_MOMMYS_ROLES**  
   The role mommy will have.  
   _Default: "mommy"_
 
-- **NODE_MOMMY_EMOTES**  
+- **NODE_MOMMYS_EMOTES**  
   The emotes mommy will decorate her messages with.  
   _Default: "❤️/💖/💗/💓/💞"_
 
-- **NODE_MOMMY_MOODS**  
+- **NODE_MOMMYS_MOODS**  
   The set of responses mommy can use (possible values include "chill" or "ominous").  
   _Default: "chill"_
 
@@ -93,7 +93,7 @@ Mommy also supports additional variables for controlling the frequency of her me
 
 ## Fallback to cargo-mommy Settings
 
-If you have [cargo-mommy](https://github.com/Gankra/cargo-mommy) installed and its environment variables are set, node-mommy will use those configurations when the corresponding NODE_MOMMY variables are not defined. For example, if `NODE_MOMMY_LITTLE` isn't set but `CARGO_MOMMYS_LITTLE` is, then mommy will call you the value set in `CARGO_MOMMYS_LITTLE`.
+If you have [cargo-mommy](https://github.com/Gankra/cargo-mommy) installed and its environment variables are set, node-mommy will use those configurations when the corresponding NODE_MOMMYS variables are not defined. For example, if `NODE_MOMMYS_LITTLE` isn't set but `CARGO_MOMMYS_LITTLE` is, then mommy will call you the value set in `CARGO_MOMMYS_LITTLE`.
 
 ---
 
