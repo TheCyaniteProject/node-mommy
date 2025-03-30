@@ -41,13 +41,23 @@ console.error("An error occurred!");
 - "An error occurred!
   Don't worry, mommy believes in you even when things go wrong!"
 
+### Fetching Mommy's Responses
+
+You can now also fetch mommy's responses from your `console.log`/`console.error` commands. This can be useful if you want to display the messages in a custom interface or log them elsewhere. For example:
+
+```js
+// Code snip from kieee's control panel
+const mommyResponse = console.log(message);
+mainWindow.webContents.send('print-log', `${message.trim()}\n${mommyResponse}`, idname);
+```
+
 Simply run your Node.js application as you normally would, and let node-mommy do the rest!
 
 ---
 
 ## Configuration
 
-Mommy personalizes her messages using the following environment variables. Each variable requires a list (`["option1, option2"]`), and mommy will randomly select one for each message:
+Mommy personalizes her messages using the following environment variables. All of these options can take a `/` separated list, and mommy will randomly select one for each message:
 
 - **NODE_MOMMY_LITTLE**  
   What mommy should call you.  
