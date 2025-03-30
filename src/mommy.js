@@ -193,7 +193,7 @@ let MOMMYS_FUCKING = "";
 let MOMMYS_ATTENTION = "";
 let MOMMYS_PATIENCE = "";
 
-let MOMMYS_DEBUG = true;
+let MOMMYS_DEBUG = false;
 
 let mommys_attention_counter = 1;
 let mommys_patience_counter = 1;
