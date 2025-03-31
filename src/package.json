@@ -1,6 +1,6 @@
 {
   "name": "node-mommy",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "main": "mommy.js",
   "bin": {
     "node-mommy": "mommy.js"

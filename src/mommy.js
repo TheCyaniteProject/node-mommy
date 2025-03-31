@@ -47,16 +47,66 @@ const mommys = {
             ]
         },
 
+        "friendly": {
+            "positive": [
+                "{role} knows that {pronoun} bestie can do it- keep pushing, {affectionate_term}!",
+                "Hey {affectionate_term}, {role} is proud of you- {pronoun} best friend is truly amazing!",
+                "{role} sees that {pronoun} bestie is soaring high today- way to shine, {affectionate_term}!",
+                "Keep on rocking, {affectionate_term}! {role} believes {pronoun} bestie can conquer any challenge!",
+                "Brilliant work, {affectionate_term}! {role} adores how {pronoun} best friend makes magic happen!",
+                "What an achievement! {role} is awestruck by {pronoun} bestie's talent, {affectionate_term}!",
+                "You're on fire, {affectionate_term}! {role}'s best friend {pronoun} really showed the world!",
+                "Stellar performance, {affectionate_term}! {role} is cheering because {pronoun} bestie is unstoppable!",
+                "Keep it up, {affectionate_term}! {role} has full faith that {pronoun} best friend will reach new heights!",
+                "Hats off to you, {affectionate_term}! {role} celebrates every win of {pronoun} bestie!"
+            ],
+            "negative": [
+                "It's okay, {affectionate_term}. {role} knows even the besties have off days, {pronoun}.",
+                "Don't worry, {affectionate_term}. {role} is here for {pronoun} best friend through every setback.",
+                "Even heroes stumble, {affectionate_term}. {role} believes in {pronoun} bestie, no matter the challenge.",
+                "Hang in there, {affectionate_term}. {role} trusts that {pronoun} best friend will bounce back stronger.",
+                "Take it slow, {affectionate_term}. {role} sees that every step counts for {pronoun} bestie.",
+                "Keep your chin up, {affectionate_term}. {role} is convinced {pronoun} best friend can overcome anything.",
+                "No stress, {affectionate_term}. {role} knows that {pronoun} bestie is resilient and can rise again.",
+                "Sometimes things don't go perfectly, {affectionate_term}. {role} still champions {pronoun} best friend.",
+                "It's okay to take a break, {affectionate_term}. {role} is with {pronoun} bestie through thick and thin.",
+                "Remember, {affectionate_term}, {role} believes in {pronoun} best friend, even during tough times."
+            ],
+            "overflow": [
+                "{role} thinks that {pronoun} bestie needs a pause- time to catch your breath, {affectionate_term}!"
+            ]
+        },
+
         "ominous": {
             "positive": [
                 "What you have set in motion today will be remembered for aeons to come!",
                 "{role} will see to it that {pronoun} little {affectionate_term}'s name is feared~",
-                "{role} is proud of the evil seed {pronoun} {affectionate_term} has planted into this accursed world"
+                "{role} is proud of the evil seed {pronoun} {affectionate_term} has planted into this accursed world",
+                "The abyss awakens at your command; {role} declares that destiny is forever rewritten in blood and shadow!",
+                "As night swallows the light, {role} ensures that every whispered name- especially {pronoun} little {affectionate_term}- will echo in eternal dread.",
+                "{role} revels in the infernal bloom, for the blight of {pronoun} cherished {affectionate_term} has seeded despair across this doomed realm.",
+                "A new era of terror begins under your gaze; {role} proclaims that {pronoun} cherished {affectionate_term} will herald an apocalypse of despair.",
+                "With a mere breath, you have ignited the furnace of fate- {role} shall ensure that every moment is drenched in everlasting gloom.",
+                "From the cradle of chaos, {role} now watches as {pronoun} precious {affectionate_term} inscribes its dark sigil upon eternity.",
+                "Let the chronicles of ruin be sung for centuries- {role} extols the sinister triumph of {pronoun} beloved {affectionate_term} across mortal realms.",
+                "Under the watchful veil of twilight, {role} blesses the malignant seed sown by {pronoun} adoring {affectionate_term}, promising relentless torment to all.",
+                "In the whisper of dying breaths, {role} echoes the spectral decree that {pronoun} enchanted {affectionate_term} will haunt the ages unbound.",
+                "The heavens tremble in sinister homage- {role} heralds that even {pronoun} dearest {affectionate_term} shall kindle the fires of eternal damnation."
             ],
             "negative": [
                 "Ah, failure? {role} will make sure the stars are right next time",
                 "Does {role}'s little {affectionate_term} need more time for worship~?",
-                "May the mark of the beast stain your flesh forever, {role} will haunt your soul forevermore"
+                "May the mark of the beast stain your flesh forever, {role} will haunt your soul forevermore",
+                "A misstep into oblivion-{role} warns that failure will have you forever ensnared in the foul grasp of darkness.",
+                "Dare you delay? {role} mocks those who hesitate, knowing even {pronoun} little {affectionate_term}'s despair can summon eternal torment.",
+                "Suffer now, for the mark of damnation awaits- you have angered {role}, and {pronoun} sinister vengeance shall shadow your every breath.",
+                "Trepidation fills the void; let {role} remind you that every falter carves deep scars upon your tormented soul.",
+                "Your failure is a bitter melody in the symphony of doom- {role} assures that every missed opportunity deepens the eternal curse.",
+                "Drown in regret, for {role} decrees that the ignominy of defeat will embed itself in every heartbeat, a relentless dirge of despair.",
+                "Hesitate, and the abyss will mock your frailty- {role} condemns the feeble and brands each failure with infernal scorn.",
+                "Beware the cursed winds of misfortune; {role} promises that each stumble summons unyielding specters to haunt your every step.",
+                "The chill of eternal night shall engulf the imbecile who falters- {role} assures you that no error escapes their inexorable retribution.",
+                "Your error is writ large upon the canvas of despair; {role} vows to etch your fate with the relentless torment of the damned."
             ],
             "overflow": [
                 "THOU HAST DRUNK TOO DEEPLY OF THE FONT"

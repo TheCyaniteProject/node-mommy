@@ -76,7 +76,7 @@ Mommy personalizes her messages using the following environment variables. All o
   _Default: "❤️/💖/💗/💓/💞"_
 
 - **NODE_MOMMY_MOODS**  
-  The set of responses mommy can use (possible values include "chill" or "ominous").  
+  The set of responses mommy can use (possible values include "friendly" "chill" or "ominous").  
   _Default: "chill"_
 
 Mommy also supports additional variables for controlling the frequency of her messages:
