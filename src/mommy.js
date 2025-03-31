@@ -182,114 +182,97 @@ NODE_MOMMYS_ATTENTION
 NODE_MOMMYS_PATIENCE
 */
 
-let MOMMYS_LITTLE = "";
-let MOMMYS_PRONOUNS = "";
-let MOMMYS_ROLES = "";
-let MOMMYS_EMOTES = "";
-let MOMMYS_MOODS = "";
-let MOMMYS_PARTS = "";
-let MOMMYS_FUCKING = "";
-
-let MOMMYS_ATTENTION = "";
-let MOMMYS_PATIENCE = "";
-
-let MOMMYS_DEBUG = false;
-
-let mommys_attention_counter = 1;
-let mommys_patience_counter = 1;
 
 const oldLog = console.log;
 const oldError = console.error;
 
-console.log = (...args) => { oldLog(...args); const output = mommys_output(true); oldLog(output); return output; }
-console.error = (...args) => { oldLog(...args); const output = mommys_output(false); oldLog(output); return output; }
+console.log = (...args) => { oldLog(...args); const output = mommys_output(true);  if (output !== "") oldLog(output); return output; }
+console.error = (...args) => { oldLog(...args); const output = mommys_output(false); if (output !== "") oldLog(output); return output; }
 
 
-function mommys_output(isGood) {
+let MOMMYS_LITTLE = getSetting("NODE_MOMMYS_LITTLE", "CARGO_MOMMYS_LITTLE", mommys.vars.affectionate_term.defaults).split("/");
+let MOMMYS_PRONOUNS = getSetting("NODE_MOMMYS_PRONOUNS", "CARGO_MOMMYS_PRONOUNS", mommys.vars.pronoun.defaults).split("/");
+let MOMMYS_ROLES = getSetting("NODE_MOMMYS_ROLES", "CARGO_MOMMYS_ROLES", mommys.vars.role.defaults).split("/");
+let MOMMYS_EMOTES = getSetting("NODE_MOMMYS_EMOTES", "CARGO_MOMMYS_EMOTES", mommys.vars.emote.defaults).split("/");
+let MOMMYS_MOODS = getSetting("NODE_MOMMYS_MOODS", "CARGO_MOMMYS_MOODS", mommys.vars.mood.defaults).split("/");
+let MOMMYS_PARTS = getSetting("NODE_MOMMYS_PARTS", "CARGO_MOMMYS_PARTS", mommys.vars.part.defaults).split("/");
+let MOMMYS_FUCKING = getSetting("NODE_MOMMYS_FUCKING", "CARGO_MOMMYS_FUCKING", mommys.vars.denigrating_term.defaults).split("/");
+
+let MOMMYS_ATTENTION = getSetting("NODE_MOMMYS_ATTENTION", undefined, [1]).split("/"); // [ 1 ] as in length of 1 by default
+let MOMMYS_PATIENCE = getSetting("NODE_MOMMYS_PATIENCE", undefined, [1]).split("/");
+
+let mommys_attention_counter = 1;
+let mommys_patience_counter = 1;
+
+
+function mommys_output(isGood, force) {
 
     let output = "";
 
-    MOMMYS_ATTENTION = getSetting("NODE_MOMMYS_ATTENTION", undefined, [1]); // [ 1 ] as in length of 1 by default
-    MOMMYS_PATIENCE = getSetting("NODE_MOMMYS_PATIENCE", undefined, [1]);
+    let patience = JSON.parse(isGood ? MOMMYS_ATTENTION[randomFromLength(MOMMYS_ATTENTION)] : MOMMYS_PATIENCE[randomFromLength(MOMMYS_PATIENCE)])
 
-    let patience = JSON.parse(isGood ? MOMMYS_ATTENTION.split("/")[randomFromLength(MOMMYS_ATTENTION.split("/"))] : MOMMYS_PATIENCE.split("/")[randomFromLength(MOMMYS_PATIENCE.split("/"))])
 
-    if ((isGood && mommys_attention_counter >= patience) || (!isGood && mommys_patience_counter >= patience)) {
-        MOMMYS_LITTLE = getSetting("NODE_MOMMYS_LITTLE", "CARGO_MOMMYS_LITTLE", mommys.vars.affectionate_term.defaults);
-        MOMMYS_PRONOUNS = getSetting("NODE_MOMMYS_PRONOUNS", "CARGO_MOMMYS_PRONOUNS", mommys.vars.pronoun.defaults);
-        MOMMYS_ROLES = getSetting("NODE_MOMMYS_ROLES", "CARGO_MOMMYS_ROLES", mommys.vars.role.defaults);
-        MOMMYS_EMOTES = getSetting("NODE_MOMMYS_EMOTES", "CARGO_MOMMYS_EMOTES", mommys.vars.emote.defaults);
-        MOMMYS_MOODS = getSetting("NODE_MOMMYS_MOODS", "CARGO_MOMMYS_MOODS", mommys.vars.mood.defaults);
-        MOMMYS_PARTS = getSetting("NODE_MOMMYS_PARTS", "CARGO_MOMMYS_PARTS", mommys.vars.part.defaults);
-        MOMMYS_FUCKING = getSetting("NODE_MOMMYS_FUCKING", "CARGO_MOMMYS_FUCKING", mommys.vars.denigrating_term.defaults);
+    const mommys_mood = MOMMYS_MOODS[randomFromLength(MOMMYS_MOODS)];
+    const mommys_little = MOMMYS_LITTLE[randomFromLength(MOMMYS_LITTLE)];
+    const mommys_role = MOMMYS_ROLES[randomFromLength(MOMMYS_ROLES)];
+    const mommys_pronouns = MOMMYS_PRONOUNS[randomFromLength(MOMMYS_PRONOUNS)];
+    const mommys_fucking = MOMMYS_FUCKING[randomFromLength(MOMMYS_FUCKING)];
+    const mommys_parts = MOMMYS_PARTS[randomFromLength(MOMMYS_PARTS)];
 
-        const mood = MOMMYS_MOODS.split("/")[randomFromLength(MOMMYS_MOODS.split("/"))];
-        let input = "";
-
-        if (isGood) {
-            input = mommys.moods[mood].positive[randomFromLength(mommys.moods[mood].positive)]; // random output based on random mood
-        }
-        else {
-            input = mommys.moods[mood].negative[randomFromLength(mommys.moods[mood].negative)]; // random output based on random mood
-        }
-
-        let mommys_little = MOMMYS_LITTLE.split("/")[randomFromLength(MOMMYS_LITTLE.split("/"))];
-        let mommys_role = MOMMYS_ROLES.split("/")[randomFromLength(MOMMYS_ROLES.split("/"))];
-        let mommys_pronouns = MOMMYS_PRONOUNS.split("/")[randomFromLength(MOMMYS_PRONOUNS.split("/"))];
-        let mommys_fucking = MOMMYS_FUCKING.split("/")[randomFromLength(MOMMYS_FUCKING.split("/"))];
-        let mommys_parts = MOMMYS_PARTS.split("/")[randomFromLength(MOMMYS_PARTS.split("/"))];
-
-        try {
-            output = input.replace("{affectionate_term}", mommys_little)
-                .replace("{role}", mommys_role)
-                .replace("{pronoun}", mommys_pronouns)
-                .replace("{denigrating_term}", mommys_fucking)
-                .replace("{part}", mommys_parts);
-        }
-        catch (error) {
-            oldError(`mood:${mood}\ninput:${input}\nmommys_little:${mommys_little}\nmommys_role:${mommys_role}\nmommys_pronouns:${mommys_pronouns}\nmommys_fucking:${mommys_fucking}\nmommys_parts:${mommys_parts}\n${error}`);
-        }
-
-        if (isGood) {
-            mommys_attention_counter = 1;
-        }
-        else {
-            mommys_patience_counter = 1;
-        }
-    }
-    else {
+    if (!((isGood && mommys_attention_counter >= patience) || (!isGood && mommys_patience_counter >= patience)) && !force) {
         if (isGood) {
             mommys_attention_counter += 1;
         }
         else {
             mommys_patience_counter += 1;
         }
+        return "";
     }
 
+    if (isGood) {
+        mommys_attention_counter = 1;
+    }
+    else {
+        mommys_patience_counter = 1;
+    }
+
+    let input = "";
+
+    if (isGood) {
+        input = mommys.moods[mommys_mood].positive[randomFromLength(mommys.moods[mommys_mood].positive)]; // random output based on random mood
+    }
+    else {
+        input = mommys.moods[mommys_mood].negative[randomFromLength(mommys.moods[mommys_mood].negative)]; // random output based on random mood
+    }
+
+    output = input.replace("{affectionate_term}", mommys_little)
+        .replace("{role}", mommys_role)
+        .replace("{pronoun}", mommys_pronouns)
+        .replace("{denigrating_term}", mommys_fucking)
+        .replace("{part}", mommys_parts);
+
+    
     return output;
 }
 
 function getSetting(nodeKey, cargoKey, defaultVal) {
-    if (process.env[nodeKey] !== undefined) {
-        return process.env[nodeKey];
-    } else if (process.env[cargoKey] !== undefined) {
-        return process.env[cargoKey];
-    } else {
-        return defaultVal.join('/');
-    }
+    return process.env[nodeKey] ?? process.env[cargoKey] ?? defaultVal.join('/');
 }
 
 function randomFromLength(variable) {
     return [Math.floor(Math.random() * (variable.length))]
 }
 
-
 function testing() {
+    oldLog("------ Console Testing");
     console.log("This is a log test...");
     console.error("This is an error test...");
+    oldLog("------ Output Testing");
+    oldLog(mommys_output(true, true));
+    oldLog(mommys_output(false, true));
 }
 
 // Mommy wants to practice her skills 💖
-if (MOMMYS_DEBUG) {
+if (process.env.MOMMYS_TESTING === 'true') {
     testing();
 }
