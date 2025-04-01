@@ -289,7 +289,6 @@ function mommys_output(isGood, force) {
         .replace("{denigrating_term}", mommys_fucking)
         .replace("{part}", mommys_parts);
 
-    
     return output;
 }
 

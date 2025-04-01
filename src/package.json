@@ -13,7 +13,7 @@
     "node-mommy"
   ],
   "author": "TheCyaniteProject",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "description": "Mommy's here to help you with node~",
   "devDependencies": {
     "eslint": "^9.23.0"
