@@ -254,46 +254,34 @@ let MOMMYS_PATIENCE = getSetting("NODE_MOMMYS_PATIENCE", undefined, [1]).split("
 let mommys_attention_counter = 1;
 let mommys_patience_counter = 1;
 
+let attention = {
+    "positive": 1,
+    "negative": 1
+}
 
 function mommys_output(isGood, force) {
 
     let output = "";
 
-    let patience = JSON.parse(isGood ? MOMMYS_ATTENTION[randomFromLength(MOMMYS_ATTENTION)] : MOMMYS_PATIENCE[randomFromLength(MOMMYS_PATIENCE)])
+    const patience = JSON.parse(isGood ? MOMMYS_ATTENTION[0] : MOMMYS_PATIENCE[0])
 
+    const mommys_mood = randomElement(MOMMYS_MOODS);
+    const mommys_little = randomElement(MOMMYS_LITTLE);
+    const mommys_role = randomElement(MOMMYS_ROLES);
+    const mommys_pronouns = randomElement(MOMMYS_PRONOUNS);
+    const mommys_fucking = randomElement(MOMMYS_FUCKING);
+    const mommys_parts = randomElement(MOMMYS_PARTS);
 
-    const mommys_mood = MOMMYS_MOODS[randomFromLength(MOMMYS_MOODS)];
-    const mommys_little = MOMMYS_LITTLE[randomFromLength(MOMMYS_LITTLE)];
-    const mommys_role = MOMMYS_ROLES[randomFromLength(MOMMYS_ROLES)];
-    const mommys_pronouns = MOMMYS_PRONOUNS[randomFromLength(MOMMYS_PRONOUNS)];
-    const mommys_fucking = MOMMYS_FUCKING[randomFromLength(MOMMYS_FUCKING)];
-    const mommys_parts = MOMMYS_PARTS[randomFromLength(MOMMYS_PARTS)];
+    const temperament = isGood ? "positive" : "negative";
 
-    if (!((isGood && mommys_attention_counter >= patience) || (!isGood && mommys_patience_counter >= patience)) && !force) {
-        if (isGood) {
-            mommys_attention_counter += 1;
-        }
-        else {
-            mommys_patience_counter += 1;
-        }
+    if (attention[temperament] < patience && !force) {
+        attention[temperament] += 1;
         return "";
     }
 
-    if (isGood) {
-        mommys_attention_counter = 1;
-    }
-    else {
-        mommys_patience_counter = 1;
-    }
+    let input = randomElement(mommys.moods[mommys_mood][temperament]); // random output based on random mood
+    attention[temperament] += 1;
 
-    let input = "";
-
-    if (isGood) {
-        input = mommys.moods[mommys_mood].positive[randomFromLength(mommys.moods[mommys_mood].positive)]; // random output based on random mood
-    }
-    else {
-        input = mommys.moods[mommys_mood].negative[randomFromLength(mommys.moods[mommys_mood].negative)]; // random output based on random mood
-    }
 
     output = input.replace("{affectionate_term}", mommys_little)
         .replace("{role}", mommys_role)
@@ -309,8 +297,8 @@ function getSetting(nodeKey, cargoKey, defaultVal) {
     return process.env[nodeKey] ?? process.env[cargoKey] ?? defaultVal.join('/');
 }
 
-function randomFromLength(variable) {
-    return [Math.floor(Math.random() * (variable.length))]
+function randomElement(variable) {
+    return variable[Math.floor(Math.random() * (variable.length))]
 }
 
 function testing() {
