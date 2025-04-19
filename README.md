@@ -13,10 +13,10 @@ Install node-mommy with npm:
 npm install node-mommy
 ```
 
-Then, in your application, import and activate it:
+Then, in your application, just import it:
 
 ```js
-const mommy = require('node-mommy');
+import 'node-mommy';
 ```
 
 From now on, all your `console.log` and `console.error` calls will be replaced with adorable messages from mommy!
